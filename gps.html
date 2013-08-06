@@ -15,7 +15,6 @@ var lng = p.coords.longitude;
 var accuracy = p.coords.accuracy;
 alert('井戸' + lat + '軽度' + lng + '精度' + accuracy);
 }
-
 function errorCallback(e) {
 var message = '';
 switch(e.code) {
@@ -28,11 +27,12 @@ break;
 case 3:
 message ='タイムアウトしました。';
 break;
+}
 alert(message);
 }
 //位置情報を取得できるかどうかの判定
 if (navigator.geolocation) {//APIが使える場合
-navigator.geolocation.getCurrentPosition(successCallback,errorCallback,{enableHighAccuracy:true});
+navigator.geolocation.getCurrentPosition(successCallback,errorCallback,{enableHightAccuracy:true});
 } else {//APIが使えない場合
 alert('あなたの端末では位置情報を取得出来ません。');
 }
@@ -41,9 +41,9 @@ alert('あなたの端末では位置情報を取得出来ません。');
 <h1>GPSのテスト</h1>
 <p>位置情報を取得します</p>
 <div id="gps_result"></div>
-<form action="">
+<!--<form action="">
 取得する範囲:<input type="text" name="range" />
 <input type="submit" value="送信" />
-</form>
+</form>-->
 </body>
 </html>
