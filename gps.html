@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>GPSのテスト</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+</head>
+<script>
+function successCallback(p) {
+var lat = p.coords.latitude;
+var lng = p.coords.longitude;
+var accuracy = p.coords.accuracy;
+alert('井戸' + lat + '軽度' + lng + '精度' + accuracy);
+}
+
+function errorCallback(e) {
+var message = '';
+switch(e.code) {
+case 1:
+message ='位置情報の利用が許可されていません。';
+break;
+case 2:
+message ='デバイスの位置がわかりません。';
+break;
+case 3:
+message ='タイムアウトしました。';
+break;
+alert(message);
+}
+//位置情報を取得できるかどうかの判定
+if (navigator.geolocation) {//APIが使える場合
+navigator.geolocation.getCurrentPosition(successCallback,errorCallback,{enableHighAccuracy:true});
+} else {//APIが使えない場合
+alert('あなたの端末では位置情報を取得出来ません。');
+}
+</script>
+<body>
+<h1>GPSのテスト</h1>
+<p>位置情報を取得します</p>
+<div id="gps_result"></div>
+<form action="">
+取得する範囲:<input type="text" name="range" />
+<input type="submit" value="送信" />
+</form>
+</body>
+</html>
