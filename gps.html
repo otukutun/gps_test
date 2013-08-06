@@ -5,6 +5,7 @@
 <title>GPSのテスト</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=true"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 </head>
@@ -13,7 +14,18 @@ function successCallback(p) {
 var lat = p.coords.latitude;
 var lng = p.coords.longitude;
 var accuracy = p.coords.accuracy;
-alert('井戸' + lat + '軽度' + lng + '精度' + accuracy);
+//pos2 = new google.maps.LatLng(35.690032, 139.691695);
+pos2 = new google.maps.LatLng(lat, lng); //取得した位置情報
+pos1 = new google.maps.LatLng(39.701330,141.152847);
+pos1 = new google.maps.LatLng(39.701330,141.152847);
+//pos1 = '39.701330,141.152847';
+//alert(pos1);
+
+//alert('井戸' + lat + '軽度' + lng + '精度' + accuracy);
+//var distance = google.maps.geometry.spherical.computeDistanceBetween(pos1,pos2);
+var distance = google.maps.geometry.spherical.computeDistanceBetween(pos1,pos2) / 100;
+distance = Math.ceil(distance)
+alert(distance + 'm');
 }
 function errorCallback(e) {
 var message = '';
@@ -37,6 +49,7 @@ navigator.geolocation.getCurrentPosition(successCallback,errorCallback,{enableHi
 alert('あなたの端末では位置情報を取得出来ません。');
 }
 </script>
+</head>
 <body>
 <h1>GPSのテスト</h1>
 <p>位置情報を取得します</p>
