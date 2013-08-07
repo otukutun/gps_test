@@ -13,19 +13,27 @@
 function successCallback(p) {
 var lat = p.coords.latitude;
 var lng = p.coords.longitude;
-var accuracy = p.coords.accuracy;
+//var accuracy = p.coords.accuracy;
 //pos2 = new google.maps.LatLng(35.690032, 139.691695);
-pos2 = new google.maps.LatLng(lat, lng); //取得した位置情報
-pos1 = new google.maps.LatLng(39.701330,141.152847);
-pos1 = new google.maps.LatLng(39.701330,141.152847);
+var maps = {rekishi: new google.maps.LatLng(39.701330,141.152847), morioka_shi_kousaten: new google.maps.LatLng(39.702230, 141.154269),bishamonbashi:new google.maps.LatLng(39.699147, 141.151120),ishiwari_sakura:new google.maps.LatLng(39.703753, 141.150951),iwate_koen:new google.maps.LatLng(39.700633, 141.149527)};
+pos = new google.maps.LatLng(lat, lng); //取得した位置情報
+//pos1 = new google.maps.LatLng(39.701330,141.152847);
+//pos1 = new google.maps.LatLng(39.701330,141.152847);
 //pos1 = '39.701330,141.152847';
 //alert(pos1);
-
+var distance ='';
+for (i in maps) {
+var tmp = google.maps.geometry.spherical.computeDistanceBetween(pos,maps[i]) / 100;
+distance +=  i + ':' + Math.ceil(tmp) + 'メートル<br />';
+}
+$(function() {
+$('#gps_result').html(distance);
+})
 //alert('井戸' + lat + '軽度' + lng + '精度' + accuracy);
 //var distance = google.maps.geometry.spherical.computeDistanceBetween(pos1,pos2);
-var distance = google.maps.geometry.spherical.computeDistanceBetween(pos1,pos2) / 100;
-distance = Math.ceil(distance)
-alert(distance + 'm');
+//var distance = google.maps.geometry.spherical.computeDistanceBetween(pos1,pos2) / 100;
+//distance = Math.ceil(distance)
+//alert(distance + 'm');
 }
 function errorCallback(e) {
 var message = '';
